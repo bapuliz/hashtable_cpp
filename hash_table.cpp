@@ -13,20 +13,29 @@ class HashTable {
         HashTable() = delete;
         HashTable(HashTable&) = delete;
     public:
-        std::vector<int> HashTable::hash(const std::vector<std::string>&);
-        int HashTable::hash(const std::string&);
+        std::vector<int> hash(const std::vector<std::string>&);
+        int hash(const std::string&);
         // HashTable(std::initializer_list<std::string> entries)
         HashTable(std::vector<std::string>& entries)
                      : n_buckets(HASHTABLE_BUCKET_SIZE),
                        load_factor(HASHTABLE_LOAD_FACTOR)
                 {
-                    if (size(entries) >= static_cast<size_t>(load_factor * n_buckets)) {
-                        // To find the power of HASHTABLE_GROWTH_FACTOR:
-                        // ceil(2^x * HASHTABLE_BUCKET_SIZE * HASHTABLE_LOAD_FACTOR) > size(entries)
-                        // simplified:
-                        // size_t power = ceil((log2(size(entries) / (n_buckets) * (load_factor))));
-                        // n_buckets *= pow(2, power);
-                    }
+                    // To find the power of HASHTABLE_GROWTH_FACTOR:
+                    // ceil(2^x * HASHTABLE_BUCKET_SIZE * HASHTABLE_LOAD_FACTOR) > size(entries)
+                    // simplified:
+
+                    size_t power = ceil(
+                        log2(
+                            (size(entries) / (load_factor + n_buckets)) 
+                            )
+                        );
+                        if (floor(n_buckets * pow(2, power) * load_factor) <= size(entries)) {
+                            power++;
+                        }
+                        n_buckets = n_buckets * pow(2, power);
+                        
+
+                    std::cout << n_buckets << std::endl;
                 }
 
 };
@@ -47,9 +56,9 @@ std::vector<int> HashTable::hash(const std::vector<std::string>& v){
 }
 
 int main() {
-    std::vector<std::string> t(170, "hello");
+    std::vector<std::string> t(10, "hello");
     // HashTable h ({"hi"s, "abc"s, "aa"s, "qs"s, "pl"s});
-    // HashTable h(t);
+    HashTable h(t);
 
     return 0;
 }
