@@ -36,6 +36,16 @@ void SLL::print() const{
         t_head = t_head->next;
     }
 }
+size_t SLL::size() const {
+    size_t size = 0;
+    const SLLNode* t_head = head;
+    while (t_head != nullptr) {
+        ++size;
+        t_head = t_head->next;
+    }
+
+    return size;
+}
 SLL::~SLL() {
     clear();
 }

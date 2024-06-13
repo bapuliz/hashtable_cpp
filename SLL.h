@@ -14,6 +14,7 @@ class SLL {
         void insertAtEnd(const std::string&);
         void clear();
         void print() const;
+        size_t size() const;
         ~SLL();
 };
 
