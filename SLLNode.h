@@ -8,7 +8,6 @@ class SLLNode {
         SLLNode* next;
         std::string data;
         SLLNode (const std::string& s) : data(s), next(nullptr) {};
-    
 };
 
-#endif
+#endif // SLLNODE_H

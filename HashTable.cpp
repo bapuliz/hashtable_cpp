@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "LinkedList.h"
+#include "SLL.h"
 
 using namespace std::string_literals;
 
@@ -12,9 +12,9 @@ using namespace std::string_literals;
 
 class HashTable {
     private:
-        std::vector<LinkedList> buckets;
         size_t n_buckets;
         double load_factor;
+        std::vector<SLL> buckets;
         HashTable() = delete;
         HashTable(HashTable&) = delete;
         bool resize(const size_t& entries_size) {
@@ -34,21 +34,26 @@ class HashTable {
             }
             return resized;
         }
+        void rehash() {
+
+        }
+    
+
     public:
         std::vector<int> hash(const std::vector<std::string>&);
         int hash(const std::string&);
         // HashTable(std::initializer_list<std::string> entries)
         HashTable(std::vector<std::string>& entries)
                      : n_buckets(HASHTABLE_BUCKET_SIZE),
-                       load_factor(HASHTABLE_LOAD_FACTOR)
+                       load_factor(HASHTABLE_LOAD_FACTOR),
+                       buckets(n_buckets)
                 {
-                    std::cout << resize(size(entries)) << std::endl;
-                    std::cout << n_buckets << std::endl;
+                    resize(size(entries));
                 }
 
 };
 
-#endif
+#endif // HASHTABLE_H
 
 int HashTable::hash(const std::string& t) {
     int hash = 0;
@@ -67,14 +72,12 @@ std::vector<int> HashTable::hash(const std::vector<std::string>& v){
 }
 
 int main() {
-    LinkedList sll;
-    sll.insertAtEnd("1");
-    sll.insertAtEnd("2");
-    sll.insertAtEnd("3");
-    sll.print();
-    std::vector<std::string> t(170, "hello");
-    // HashTable h ({"hi"s, "abc"s, "aa"s, "qs"s, "pl"s});
+
+    std::vector<std::string> t(171, "hello");
     HashTable h(t);
+    // HashTable h ({"hi"s, "abc"s, "aa"s, "qs"s, "pl"s});
+    
+
 
     return 0;
 }
