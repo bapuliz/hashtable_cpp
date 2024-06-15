@@ -6,8 +6,8 @@
 class SLLNode {
     public:
         SLLNode* next;
-        std::string data;
-        SLLNode (const std::string& s) : data(s), next(nullptr) {};
+        std::pair<std::string, int> data;
+        SLLNode (const std::string& k, const int& v) : data(k, v), next(nullptr) {};
 };
 
 #endif // SLLNODE_H

@@ -1,7 +1,7 @@
 #include "SLL.h"
 
-void SLL::insertAtBeginning(const std::string& data) {
-    SLLNode* newNode = new SLLNode(data);
+void SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
+    SLLNode* newNode = new SLLNode(pair.first, pair.second);
     if (head == nullptr) {
         head = newNode;
     } else {
@@ -10,8 +10,8 @@ void SLL::insertAtBeginning(const std::string& data) {
     }
 }
 
-void SLL::insertAtEnd(const std::string& data) {
-    SLLNode* newNode = new SLLNode(data);
+void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
+    SLLNode* newNode = new SLLNode(pair.first, pair.second);
     if (head == nullptr) {
         head = newNode;
     } else {
@@ -32,7 +32,7 @@ void SLL::clear(){
 void SLL::print() const{
     SLLNode* t_head = head;
     while (t_head != nullptr) {
-        std::cout << t_head->data << std::endl;
+        std::cout << "Key: " << t_head->data.first << "Value: " << t_head->data.second << std::endl;
         t_head = t_head->next;
     }
 }
