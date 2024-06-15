@@ -46,6 +46,23 @@ size_t SLL::size() const {
 
     return size;
 }
+SLL::SLL(const SLL& other) {
+    SLLNode* t_head_other = other.head;
+    if (t_head_other == nullptr) {
+        head = nullptr;
+        return;
+    }
+    SLLNode* firstNode = new SLLNode(t_head_other->data);
+    head = firstNode;
+
+    t_head_other = t_head_other->next;
+    while (t_head_other != nullptr) {
+        SLLNode* newNode = new SLLNode(t_head_other->data);
+        firstNode->next = newNode;
+        firstNode = newNode;
+        t_head_other = t_head_other->next;
+    }
+}
 SLL::~SLL() {
     clear();
 }

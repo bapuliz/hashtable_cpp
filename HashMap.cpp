@@ -49,7 +49,6 @@ class HashMap {
                     insert(new_buckets, key, value);
                 }
             }
-            // buckets = new_buckets;
             buckets.swap(new_buckets);
         }
         void insert(std::vector<SLL>& table, const std::string& key, const int& value) {
@@ -86,9 +85,9 @@ class HashMap {
 #endif // HASHMAP_H
 
 int HashMap::hash(const std::string& t) {
-    long int mod = 16777619;
+    constexpr long int mod = 16777619;
+    constexpr const int prime = 12207031;
     unsigned long long int hash = 2166136261;
-    const int prime = 12207031;
     for (std::string::const_iterator it = t.begin(); it != t.end(); ++it) {
         hash *= mod;
         hash += *it;
@@ -119,7 +118,6 @@ int main() {
     // s.insertAtBeginning({"lo", 5});
     // s.insertAtBeginning({"how", 199});
     // s.print();
-
 
     return 0;
 }

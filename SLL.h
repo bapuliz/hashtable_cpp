@@ -22,6 +22,7 @@ class SLL {
         SLL_Iterator end() const {
             return SLL_Iterator(nullptr);
         }
+        SLL(const SLL& other);
         ~SLL();
 };
 
