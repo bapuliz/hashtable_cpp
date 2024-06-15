@@ -14,6 +14,7 @@ class SLL {
         void insertAtBeginning(const std::pair<std::string, int>&);
         void insertAtEnd(const std::pair<std::string, int>&);
         void clear();
+        int find(const std::string& key) const;
         void print() const;
         size_t size() const;
         SLL_Iterator begin() const {

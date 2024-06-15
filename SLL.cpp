@@ -22,6 +22,9 @@ void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
         t_head->next = newNode;
     }
 }
+int SLL::find(const std::string& key) const {
+    return 1;
+}
 void SLL::clear(){
     while (head != nullptr) {
         SLLNode* head_next = head->next;
