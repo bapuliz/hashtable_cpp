@@ -16,6 +16,9 @@ class HashMap {
             static constexpr bool initialBucketsValid(int x);
             static constexpr bool initialLoadFactorValid(double x);
             void rehash();
+            bool exists(const std::string& key, size_t& index) const;
+            void remove(const std::string& key);
+            void update(const std::string& key, const int& new_value);
             int get(const std::string& key) const;
             void insert(std::vector<SLL>& table, const std::string& key, const int& value);
             void insert(const std::string& key, const int& value);

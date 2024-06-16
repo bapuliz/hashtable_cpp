@@ -10,6 +10,18 @@ void SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
     }
 }
 
+bool SLL::exists(const std::string& key) const {
+    SLLNode* t_head = head;
+    std::string current_key;
+    while (t_head != nullptr) {
+        current_key = t_head->data.first;
+        if (current_key == key) {
+            return true;
+        }
+        t_head = t_head->next;
+    }
+    return false;
+}
 void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
     SLLNode* newNode = new SLLNode(pair.first, pair.second);
     if (head == nullptr) {
@@ -22,8 +34,55 @@ void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
         t_head->next = newNode;
     }
 }
+void SLL::remove(const std::string& key) {
+    SLLNode* t_head = head;
+    if (t_head == nullptr) {
+        return;
+    }
+    if (t_head->data.first == key) {
+        head = head->next;
+        delete t_head;
+        return;
+    }
+   while (t_head->next != nullptr) {
+        if (t_head->next->data.first == key) {
+            SLLNode* nodeToDelete = t_head->next;
+            t_head->next = nodeToDelete->next;
+            delete nodeToDelete;
+            return;
+        }
+        t_head = t_head->next;
+    }
+    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+}
+void SLL::update(const std::string& key, const int& new_value) {
+    SLLNode* t_head = head;
+    std::string* current_key;
+    int* current_value;
+    while (t_head != nullptr) {
+        current_key = &(t_head->data.first);
+        current_value = &(t_head->data.second);
+        if (*current_key == key) {
+            *current_value = new_value;
+            return;
+        }
+        t_head = t_head->next;
+    }
+    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+}
 int SLL::find(const std::string& key) const {
-    return 1;
+    SLLNode* t_head = head;
+    std::string* current_key;
+    int* current_value;
+    while (t_head != nullptr) {
+        current_key = &(t_head->data.first);
+        current_value = &(t_head->data.second);
+        if (*current_key == key) {
+            return *current_value;
+        }
+        t_head = t_head->next;
+    }
+    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
 }
 void SLL::clear(){
     while (head != nullptr) {

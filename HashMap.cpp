@@ -16,8 +16,9 @@ constexpr bool HashMap::initialLoadFactorValid(double x){
 
 int HashMap::get(const std::string& key) const {
     size_t index = hash(key) % buckets.size();
-    
+    return buckets[index].find(key);
 }
+
 
 void HashMap::rehash() {
     // round up the size to the nearest power of 2
@@ -45,13 +46,28 @@ void HashMap::insert(std::vector<SLL>& table, const std::string& key, const int&
     table[index].insertAtBeginning({key, value});
     std::cout << "Inserted -> \tKey:" << key << "\tValue:" << value << "\tIndex: " << index << "\tCurrent buckets: " << buckets_size << std::endl;
 }
+void HashMap::update(const std::string& key, const int& new_value) {
+    size_t index = hash(key) % buckets.size();
+    buckets[index].update(key, new_value);
+}
+void HashMap::remove(const std::string& key) {
+    
+}
 void HashMap::insert(const std::string& key, const int& value)  {
+    // size_t index = hash(key) % buckets.size();
+    // if ((exists(key, index))) {
+
+    // } else {
     n_loaded++;
+    // }
     size_t buckets_size = buckets.size();
     if ( n_loaded / load_factor >= buckets_size ) {
         rehash();
     }
     insert(buckets, key, value);
+}
+bool HashMap::exists(const std::string& key, size_t& index) const {
+    return buckets[index].exists(key);
 }
 HashMap::HashMap() :
                 buckets(INITIAL_BUCKETS),

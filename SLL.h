@@ -14,6 +14,9 @@ class SLL {
         void insertAtBeginning(const std::pair<std::string, int>&);
         void insertAtEnd(const std::pair<std::string, int>&);
         void clear();
+        void update(const std::string& key, const int& new_value);
+        void remove(const std::string& key);
+        bool exists(const std::string& key) const;
         int find(const std::string& key) const;
         void print() const;
         size_t size() const;
