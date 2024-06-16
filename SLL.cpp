@@ -22,6 +22,13 @@ bool SLL::exists(const std::string& key) const {
     }
     return false;
 }
+SLL_Iterator SLL::begin() const {
+    return SLL_Iterator(head);
+}
+SLL_Iterator SLL::end() const {
+    return SLL_Iterator(nullptr);
+}
+
 void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
     SLLNode* newNode = new SLLNode(pair.first, pair.second);
     if (head == nullptr) {
@@ -37,14 +44,14 @@ void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
 void SLL::remove(const std::string& key) {
     SLLNode* t_head = head;
     if (t_head == nullptr) {
-        return;
+        throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
     }
     if (t_head->data.first == key) {
         head = head->next;
         delete t_head;
         return;
     }
-   while (t_head->next != nullptr) {
+    while (t_head->next != nullptr) {
         if (t_head->next->data.first == key) {
             SLLNode* nodeToDelete = t_head->next;
             t_head->next = nodeToDelete->next;
@@ -54,6 +61,9 @@ void SLL::remove(const std::string& key) {
         t_head = t_head->next;
     }
     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+}
+bool SLL::isEmpty() const {
+    return head == nullptr ? true : false;
 }
 void SLL::update(const std::string& key, const int& new_value) {
     SLLNode* t_head = head;

@@ -1,13 +1,6 @@
 #include "HashMap.h"
 
 int main() {
-    //  std::srand(std::time(0));
-
-    // size_t size = 169;
-    // std::vector<std::string> t;
-    // for (int i=1; i < size+1; ++i) {
-    //     t.push_back("word" + std::to_string(i) + "_" + generateRandomChar());
-    // }
     HashMap h;
     h.insert("hello", 10);
     h.insert("world", 99);
@@ -23,13 +16,13 @@ int main() {
     h.insert("word", 2000);
     h.insert("word", 2000);
     h.insert("word", 2000);
+    h.insert("word", 17);
+    h.remove("word");
+    h.remove("something");
+    h.remove("cpppp");
+    h.remove("world");
 
-    
-    // SLL s;
-    // s.insertAtBeginning({"hello", 10});
-    // s.insertAtBeginning({"lo", 5});
-    // s.insertAtBeginning({"how", 199});
-    // s.print();
+    h.print();
 
     return 0;
 }
