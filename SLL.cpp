@@ -1,6 +1,6 @@
 #include "SLL.h"
 
-void SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
+int& SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
     SLLNode* newNode = new SLLNode(pair.first, pair.second);
     if (head == nullptr) {
         head = newNode;
@@ -8,14 +8,13 @@ void SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
         newNode->next = head;
         head = newNode;
     }
+    return head->data.second;
 }
 
 bool SLL::exists(const std::string& key) const {
     SLLNode* t_head = head;
-    std::string current_key;
     while (t_head != nullptr) {
-        current_key = t_head->data.first;
-        if (current_key == key) {
+        if (t_head->data.first == key) {
             return true;
         }
         t_head = t_head->next;
@@ -65,16 +64,12 @@ void SLL::remove(const std::string& key) {
 bool SLL::isEmpty() const {
     return head == nullptr ? true : false;
 }
-void SLL::update(const std::string& key, const int& new_value) {
+int& SLL::update(const std::string& key, const int& new_value) {
     SLLNode* t_head = head;
-    std::string* current_key;
-    int* current_value;
     while (t_head != nullptr) {
-        current_key = &(t_head->data.first);
-        current_value = &(t_head->data.second);
-        if (*current_key == key) {
-            *current_value = new_value;
-            return;
+        if (t_head->data.first == key) {
+            t_head->data.second = new_value;
+            return t_head->data.second;
         }
         t_head = t_head->next;
     }
@@ -82,13 +77,9 @@ void SLL::update(const std::string& key, const int& new_value) {
 }
 int SLL::find(const std::string& key) const {
     SLLNode* t_head = head;
-    std::string* current_key;
-    int* current_value;
     while (t_head != nullptr) {
-        current_key = &(t_head->data.first);
-        current_value = &(t_head->data.second);
-        if (*current_key == key) {
-            return *current_value;
+        if (t_head->data.first == key) {
+            return t_head->data.second;
         }
         t_head = t_head->next;
     }

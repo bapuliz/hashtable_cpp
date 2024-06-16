@@ -11,11 +11,11 @@ class SLL {
     SLLNode* head;
     public:
         SLL () : head(nullptr) {};
-        void insertAtBeginning(const std::pair<std::string, int>&);
+        int& insertAtBeginning(const std::pair<std::string, int>&);
         void insertAtEnd(const std::pair<std::string, int>&);
         void clear();
         bool isEmpty() const;
-        void update(const std::string& key, const int& new_value);
+        int& update(const std::string& key, const int& new_value);
         void remove(const std::string& key);
         bool exists(const std::string& key) const;
         int find(const std::string& key) const;

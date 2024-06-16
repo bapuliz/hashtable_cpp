@@ -1,5 +1,11 @@
 #include "HashMap.h"
 
+char generateRandomChar() {
+    int randomNumber = rand() % 26;
+    char randomChar = 'a' + randomNumber;
+    return randomChar;
+}
+
 constexpr bool HashMap::initialBucketsValid(int x){
     return x >= 2 && (x & (x - 1)) == 0;
 }
@@ -8,10 +14,25 @@ constexpr bool HashMap::initialLoadFactorValid(double x){
     return x > 0.0;
 }
 
-int HashMap::get(const std::string& key) const {
+int& HashMap::operator[](const std::string& key){
+    int value = 0;
     size_t index = hash(key) % buckets.size();
-    return buckets[index].find(key);
+    if ((exists(key, index))) {
+        return update(key, value);
+    }
+    size_t buckets_size = buckets.size();
+    if ((n_loaded + 1) / load_factor >= buckets_size) {
+        return rehashTable({key, value});
+    } else {
+        return insert(buckets, key, value);
+    }
 }
+
+
+// int HashMap::get(const std::string& key) const {
+//     size_t index = hash(key) % buckets.size();
+//     return buckets[index].find(key);
+// }
 
 void HashMap::print() const {
     size_t index (0);
@@ -38,7 +59,7 @@ void HashMap::print() const {
     }
     
 }
-void HashMap::rehashTable(const std::pair<std::string,int>& top_elem) {
+int& HashMap::rehashTable(const std::pair<std::string,int>& top_elem) {
     // round up the size to the nearest power of 2
     size_t power = floor(log2(ceil(n_loaded / load_factor)))+1;
     size_t default_power = log2(INITIAL_BUCKETS);
@@ -56,33 +77,33 @@ void HashMap::rehashTable(const std::pair<std::string,int>& top_elem) {
             insert(new_buckets, key, value);
         }
     }
-    // inserting top element
-    insert(new_buckets, top_elem.first, top_elem.second);
     buckets.swap(new_buckets);
+    // inserting top element
+    return insert(buckets, top_elem.first, top_elem.second);
 }
-void HashMap::insert(std::vector<SLL>& table, const std::string& key, const int& value) {
+int& HashMap::insert(std::vector<SLL>& table, const std::string& key, const int& value) {
     n_loaded += 1;
     size_t buckets_size = table.size();
     size_t index = hash(key) % buckets_size;
-    table[index].insertAtBeginning({key, value});
+    return table[index].insertAtBeginning({key, value});
 }
-void HashMap::insert(const std::string& key, const int& value)  {
-    size_t index = hash(key) % buckets.size();
-    if ((exists(key, index))) {
-        update(key, value);
-        return;
-    }
-    size_t buckets_size = buckets.size();
-    if ((n_loaded + 1) / load_factor >= buckets_size) {
-        rehashTable({key, value});
-    } else {
-        insert(buckets, key, value);
-    }
-}
+// void HashMap::insert(const std::string& key, const int& value)  {
+//     size_t index = hash(key) % buckets.size();
+//     if ((exists(key, index))) {
+//         update(key, value);
+//         return;
+//     }
+//     size_t buckets_size = buckets.size();
+//     if ((n_loaded + 1) / load_factor >= buckets_size) {
+//         rehashTable({key, value});
+//     } else {
+//         insert(buckets, key, value);
+//     }
+// }
 
-void HashMap::update(const std::string& key, const int& new_value) {
+int& HashMap::update(const std::string& key, const int& new_value) {
     size_t index = hash(key) % buckets.size();
-    buckets[index].update(key, new_value);
+    return buckets[index].update(key, new_value);
 }
 void HashMap::remove(const std::string& key) { 
     size_t index = hash(key) % buckets.size();
