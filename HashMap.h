@@ -19,10 +19,10 @@ class HashMap {
             int& rehashTable(const std::pair<std::string,int>& top_elem);
             bool exists(const std::string& key, size_t& index) const;
             void remove(const std::string& key);
-            int& update(const std::string& key, const int& new_value);
+            // int& update(const std::string& key, const int& new_value);
             int& insert(std::vector<SLL>& table, const std::string& key, const int& value);
             // void insert(const std::string& key, const int& value);
-            // int get(const std::string& key) const;
+            int& get(const std::string& key) const;
             int& operator[](const std::string& key);
             int hash(const std::string&) const;
             HashMap();

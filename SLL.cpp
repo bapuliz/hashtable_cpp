@@ -64,18 +64,18 @@ void SLL::remove(const std::string& key) {
 bool SLL::isEmpty() const {
     return head == nullptr ? true : false;
 }
-int& SLL::update(const std::string& key, const int& new_value) {
-    SLLNode* t_head = head;
-    while (t_head != nullptr) {
-        if (t_head->data.first == key) {
-            t_head->data.second = new_value;
-            return t_head->data.second;
-        }
-        t_head = t_head->next;
-    }
-    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
-}
-int SLL::find(const std::string& key) const {
+// int& SLL::update(const std::string& key, const int& new_value) {
+//     SLLNode* t_head = head;
+//     while (t_head != nullptr) {
+//         if (t_head->data.first == key) {
+//             t_head->data.second = new_value;
+//             return t_head->data.second;
+//         }
+//         t_head = t_head->next;
+//     }
+//     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+// }
+int& SLL::find(const std::string& key) const {
     SLLNode* t_head = head;
     while (t_head != nullptr) {
         if (t_head->data.first == key) {

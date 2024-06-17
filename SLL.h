@@ -15,10 +15,10 @@ class SLL {
         void insertAtEnd(const std::pair<std::string, int>&);
         void clear();
         bool isEmpty() const;
-        int& update(const std::string& key, const int& new_value);
+        // int& update(const std::string& key, const int& new_value);
         void remove(const std::string& key);
         bool exists(const std::string& key) const;
-        int find(const std::string& key) const;
+        int& find(const std::string& key) const;
         void print() const;
         size_t size() const;
         SLL_Iterator begin() const;

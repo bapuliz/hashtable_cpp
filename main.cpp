@@ -2,11 +2,9 @@
 
 int main() {
     HashMap h;
-    h["hello"] = 100;
-    h["hello"] = 50;
-    h["word"] = 1000;
+    h["word"] = 50;
+    std::cout << h["word"] << std::endl;
     h.print();
-
 
     return 0;
 }

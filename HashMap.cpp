@@ -18,7 +18,8 @@ int& HashMap::operator[](const std::string& key){
     int value = 0;
     size_t index = hash(key) % buckets.size();
     if ((exists(key, index))) {
-        return update(key, value);
+        return get(key);
+        // return update(key, value);
     }
     size_t buckets_size = buckets.size();
     if ((n_loaded + 1) / load_factor >= buckets_size) {
@@ -29,10 +30,10 @@ int& HashMap::operator[](const std::string& key){
 }
 
 
-// int HashMap::get(const std::string& key) const {
-//     size_t index = hash(key) % buckets.size();
-//     return buckets[index].find(key);
-// }
+int& HashMap::get(const std::string& key) const {
+    size_t index = hash(key) % buckets.size();
+    return buckets[index].find(key);
+}
 
 void HashMap::print() const {
     size_t index (0);
@@ -101,10 +102,10 @@ int& HashMap::insert(std::vector<SLL>& table, const std::string& key, const int&
 //     }
 // }
 
-int& HashMap::update(const std::string& key, const int& new_value) {
-    size_t index = hash(key) % buckets.size();
-    return buckets[index].update(key, new_value);
-}
+// int& HashMap::update(const std::string& key, const int& new_value) {
+//     size_t index = hash(key) % buckets.size();
+//     return buckets[index].update(key, new_value);
+// }
 void HashMap::remove(const std::string& key) { 
     size_t index = hash(key) % buckets.size();
     buckets[index].remove(key);
