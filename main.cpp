@@ -1,7 +1,7 @@
 #include "HashMap.h"
 
 int main() {
-    HashMap h;
+    HashMap<std::string, int> h;
     h["word"] = 50;
     std::cout << h["word"] << std::endl;
     h.print();

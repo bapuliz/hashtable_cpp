@@ -1,7 +1,6 @@
-#include "SLL.h"
-
-int& SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
-    SLLNode* newNode = new SLLNode(pair.first, pair.second);
+template <typename T, typename V>
+V& SLL<T,V>::insertAtBeginning(const std::pair<T, V>& pair) {
+    SLLNode<T,V>* newNode = new SLLNode<T,V>(pair.first, pair.second);
     if (head == nullptr) {
         head = newNode;
     } else {
@@ -11,8 +10,9 @@ int& SLL::insertAtBeginning(const std::pair<std::string, int>& pair) {
     return head->data.second;
 }
 
-bool SLL::exists(const std::string& key) const {
-    SLLNode* t_head = head;
+template <typename T, typename V>
+bool SLL<T,V>::exists(const T& key) const {
+    SLLNode<T,V>* t_head = head;
     while (t_head != nullptr) {
         if (t_head->data.first == key) {
             return true;
@@ -21,27 +21,31 @@ bool SLL::exists(const std::string& key) const {
     }
     return false;
 }
-SLL_Iterator SLL::begin() const {
+template <typename T, typename V>
+SLL_Iterator<T,V> SLL<T,V>::begin() const {
     return SLL_Iterator(head);
 }
-SLL_Iterator SLL::end() const {
-    return SLL_Iterator(nullptr);
+template <typename T, typename V>
+SLL_Iterator<T,V> SLL<T,V>::end() const {
+    return SLL_Iterator<T,V>(nullptr);
 }
 
-void SLL::insertAtEnd(const std::pair<std::string, int>& pair) {
-    SLLNode* newNode = new SLLNode(pair.first, pair.second);
+template <typename T, typename V>
+void SLL<T,V>::insertAtEnd(const std::pair<T, V>& pair) {
+    SLLNode<T,V>* newNode = new SLLNode<T,V>(pair.first, pair.second);
     if (head == nullptr) {
         head = newNode;
     } else {
-        SLLNode* t_head = head;
+        SLLNode<T,V>* t_head = head;
         while (t_head->next != nullptr) {
             t_head = t_head->next;
         }
         t_head->next = newNode;
     }
 }
-void SLL::remove(const std::string& key) {
-    SLLNode* t_head = head;
+template <typename T, typename V>
+void SLL<T,V>::remove(const T& key) {
+    SLLNode<T,V>* t_head = head;
     if (t_head == nullptr) {
         throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
     }
@@ -52,7 +56,7 @@ void SLL::remove(const std::string& key) {
     }
     while (t_head->next != nullptr) {
         if (t_head->next->data.first == key) {
-            SLLNode* nodeToDelete = t_head->next;
+            SLLNode<T,V>* nodeToDelete = t_head->next;
             t_head->next = nodeToDelete->next;
             delete nodeToDelete;
             return;
@@ -61,11 +65,12 @@ void SLL::remove(const std::string& key) {
     }
     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
 }
-bool SLL::isEmpty() const {
+template <typename T, typename V>
+bool SLL<T,V>::isEmpty() const {
     return head == nullptr ? true : false;
 }
-// int& SLL::update(const std::string& key, const int& new_value) {
-//     SLLNode* t_head = head;
+// V& SLL::update(const T& key, const V& new_value) {
+//     SLLNode<T,V>* t_head = head;
 //     while (t_head != nullptr) {
 //         if (t_head->data.first == key) {
 //             t_head->data.second = new_value;
@@ -75,8 +80,9 @@ bool SLL::isEmpty() const {
 //     }
 //     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
 // }
-int& SLL::find(const std::string& key) const {
-    SLLNode* t_head = head;
+template <typename T, typename V>
+V& SLL<T,V>::find(const T& key) const {
+    SLLNode<T,V>* t_head = head;
     while (t_head != nullptr) {
         if (t_head->data.first == key) {
             return t_head->data.second;
@@ -85,23 +91,26 @@ int& SLL::find(const std::string& key) const {
     }
     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
 }
-void SLL::clear(){
+template <typename T, typename V>
+void SLL<T,V>::clear(){
     while (head != nullptr) {
-        SLLNode* head_next = head->next;
+        SLLNode<T,V>* head_next = head->next;
         delete head;
         head = head_next;
     }
 }
-void SLL::print() const{
-    SLLNode* t_head = head;
+template <typename T, typename V>
+void SLL<T,V>::print() const{
+    SLLNode<T,V>* t_head = head;
     while (t_head != nullptr) {
         std::cout << "Key: " << t_head->data.first << "Value: " << t_head->data.second << std::endl;
         t_head = t_head->next;
     }
 }
-size_t SLL::size() const {
+template <typename T, typename V>
+size_t SLL<T,V>::size() const {
     size_t size = 0;
-    const SLLNode* t_head = head;
+    const SLLNode<T,V>* t_head = head;
     while (t_head != nullptr) {
         ++size;
         t_head = t_head->next;
@@ -109,23 +118,25 @@ size_t SLL::size() const {
 
     return size;
 }
-SLL::SLL(const SLL& other) {
-    SLLNode* t_head_other = other.head;
+template <typename T, typename V>
+SLL<T,V>::SLL(const SLL& other) {
+    SLLNode<T,V>* t_head_other = other.head;
     if (t_head_other == nullptr) {
         head = nullptr;
         return;
     }
-    SLLNode* firstNode = new SLLNode(t_head_other->data);
+    SLLNode<T,V>* firstNode = new SLLNode<T,V>(t_head_other->data);
     head = firstNode;
 
     t_head_other = t_head_other->next;
     while (t_head_other != nullptr) {
-        SLLNode* newNode = new SLLNode(t_head_other->data);
+        SLLNode<T,V>* newNode = new SLLNode<T,V>(t_head_other->data);
         firstNode->next = newNode;
         firstNode = newNode;
         t_head_other = t_head_other->next;
     }
 }
-SLL::~SLL() {
+template <typename T, typename V>
+SLL<T,V>::~SLL() {
     clear();
 }
