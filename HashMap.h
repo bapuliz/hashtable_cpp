@@ -6,30 +6,28 @@
 #include "SLL.h"
 using namespace std::string_literals;
 
-template <typename T, typename V>
+template <typename K, typename V>
 class HashMap {
-        static constexpr size_t INITIAL_BUCKETS = 8;
-        static constexpr double LOAD_FACTOR = (2.0/3.0);
-        size_t n_loaded;
-        double load_factor;
-        std::vector<SLL<T,V> > buckets;
+        private:
+            static constexpr bool initialBucketsValid(int x);
+            static constexpr bool initialLoadFactorValid(double x);
+            static constexpr size_t INITIAL_BUCKETS = 8;
+            static constexpr double LOAD_FACTOR = (2.0/3.0);
+            static constexpr long int mod = 16777619;
+            static constexpr int prime = 12207031;
+            static constexpr unsigned long long int base_hash = 2166136261;
+            size_t n_loaded;
+            double load_factor;
+            std::vector<SLL<K,V> > buckets;
+            V& rehashTable(const std::pair<K,V>& top_elem);
+            V& insert(std::vector<SLL<K,V> >& table, const K& key, const V& value);
+            int hash(const K&) const;
         public:
-            static constexpr bool initialBucketsValid(int x){
-                return x >= 2 && (x & (x - 1)) == 0;
-            }
-            static constexpr bool initialLoadFactorValid(double x){
-                return x > 0.0;
-            }
             void print() const;
-            V& rehashTable(const std::pair<T,V>& top_elem);
-            bool exists(const T& key, size_t& index) const;
-            void remove(const T& key);
-            // V& update(const T& key, const V& new_value);
-            V& insert(std::vector<SLL<T,V> >& table, const T& key, const V& value);
-            // void insert(const T& key, const V& value);
-            V& get(const T& key) const;
-            V& operator[](const T& key);
-            int hash(const std::string&) const;
+            bool exists(const K& key, size_t& index) const;
+            void remove(const K& key);
+            V& get(const K& key) const;
+            V& operator[](const K& key);
             HashMap();
             ~HashMap() {};
 };

@@ -7,23 +7,23 @@
 #ifndef SLL_H
 #define SLL_H
 
-template <typename T, typename V>
+template <typename K, typename V>
 class SLL {
-    SLLNode<T,V>* head;
+    SLLNode<K,V>* head;
     public:
         SLL () : head(nullptr) {};
-        V& insertAtBeginning(const std::pair<T, V>&);
-        void insertAtEnd(const std::pair<T, V>&);
+        V& insertAtBeginning(const std::pair<K, V>&);
+        void insertAtEnd(const std::pair<K, V>&);
         void clear();
         bool isEmpty() const;
-        // V& update(const T& key, const V& new_value);
-        void remove(const T& key);
-        bool exists(const T& key) const;
-        V& find(const T& key) const;
+        // V& update(const K& key, const V& new_value);
+        void remove(const K& key);
+        bool exists(const K& key) const;
+        V& find(const K& key) const;
         void print() const;
         size_t size() const;
-        SLL_Iterator<T,V> begin() const;
-        SLL_Iterator<T,V> end() const;
+        SLL_Iterator<K,V> begin() const;
+        SLL_Iterator<K,V> end() const;
         SLL(const SLL& other);
         ~SLL();
 };

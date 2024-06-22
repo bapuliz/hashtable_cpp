@@ -54,6 +54,7 @@
         "variant": "cpp",
         "algorithm": "cpp",
         "__memory": "cpp",
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "functional": "cpp"
     }
 }

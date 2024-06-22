@@ -3,13 +3,13 @@
 #ifndef SLLNODE_H
 #define SLLNODE_H
 
-template <typename T, typename V>
+template <typename K, typename V>
 class SLLNode {
     public:
         SLLNode* next;
-        std::pair<T, V> data;
-        SLLNode (const T& key, const V& value);
-        SLLNode (const std::pair<T, V>& pair);
+        std::pair<K, V> data;
+        SLLNode (const K& key, const V& value);
+        SLLNode (const std::pair<K, V>& pair);
 };
 
 #include "SLLNode.tpp"
