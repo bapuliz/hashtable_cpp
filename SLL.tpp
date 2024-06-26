@@ -47,7 +47,7 @@ template <typename K, typename V>
 void SLL<K,V>::remove(const K& key) {
     SLLNode<K,V>* t_head = head;
     if (t_head == nullptr) {
-        throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+        throw std::out_of_range("KeyError. The specified key is not found in the list");
     }
     if (t_head->data.first == key) {
         head = head->next;
@@ -63,23 +63,12 @@ void SLL<K,V>::remove(const K& key) {
         }
         t_head = t_head->next;
     }
-    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+    throw std::out_of_range("KeyError. The specified key is not found in the list");
 }
 template <typename K, typename V>
 bool SLL<K,V>::isEmpty() const {
     return head == nullptr ? true : false;
 }
-// V& SLL::update(const K& key, const V& new_value) {
-//     SLLNode<K,V>* t_head = head;
-//     while (t_head != nullptr) {
-//         if (t_head->data.first == key) {
-//             t_head->data.second = new_value;
-//             return t_head->data.second;
-//         }
-//         t_head = t_head->next;
-//     }
-//     throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
-// }
 template <typename K, typename V>
 V& SLL<K,V>::find(const K& key) const {
     SLLNode<K,V>* t_head = head;
@@ -89,7 +78,7 @@ V& SLL<K,V>::find(const K& key) const {
         }
         t_head = t_head->next;
     }
-    throw std::out_of_range("KeyError. Key: " + key + " not found in the list");
+    throw std::out_of_range("KeyError. The specified key is not found in the list");
 }
 template <typename K, typename V>
 void SLL<K,V>::clear(){

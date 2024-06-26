@@ -102,18 +102,3 @@ HashMap<K,V>::HashMap() :
                     static_assert(initialLoadFactorValid(LOAD_FACTOR),
                         "HASHMAP_LOAD_FACTOR must be > 0");
                 }
-
-template<>
-int HashMap<std::string, int>::hash(const std::string& t) const {
-    unsigned long long int hash = base_hash;
-    for (std::string::const_iterator it = t.begin(); it != t.end(); ++it) {
-        hash *= mod;
-        hash += *it;
-        hash %= prime;
-    }
-    return hash;
-}
-// template<K,V>
-// int HashMap<int, V>::hash(const int& t) const {
-//     return t;
-// }
